@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html>
+<body>
+
+    <!--    
+    <h1> head 1 </h1>
+    <h2> head 2 </h2>
+    <h3> head 3 </h3>
+    <h4> head 4 </h4>
+    <h5> head 5 </h5>
+    <h6> head 6 </h6>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porttitor id est eu elementum. Nullam eget orci eu lorem tincidunt tempus quis ut sapien. Aliquam iaculis vehicula orci nec euismod. Nunc sed eros vestibulum, lacinia nulla in, volutpat mi. Sed imperdiet enim nunc, non lobortis nibh ullamcorper eget. Vivamus cursus nisl augue, ut vehicula justo porttitor in. Sed eu scelerisque leo, ut laoreet augue. Nunc eu ullamcorper ligula, sed facilisis felis. Pellentesque interdum sit amet tortor ut consequat. Nam et erat maximus, rutrum enim sit amet, condimentum erat. Duis leo nisl, lobortis sit amet commodo faucibus, pretium luctus ante. Cras a enim porta, facilisis ipsum eu, faucibus libero. </p>
+    --> 
+
+    <!-- 
+        br = line break, adds an empty line in between 
+    -->
+
+    <h1> This is the home page </h1>
+    <br><br>
+    <a href="sayhello.html">Go to the say hello page.</a>
+
+</body>    
+</html>
