@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Grade Computation</h1>
+    <br><br>
+    <label for="score">Type the score:</label>
+    <input id="score" type="number">
+    <label for="items">Type the no. of items:</label>
+    <input id="items" type="number">
+    <br>
+    <label for="base">Type the base of computation:</label>
+    <input id="base" type="number">
+    <button id="computegrade">Compute Grade</button> 
+    <br><br>
+    <label for="grade">Grade:</label>
+    <input id="grade" type="number">
+    <label for="lettergrade">Equivalent Grade:</label>
+    <input id="lettergrade" type="text">
+    <br><br>
+    <h1 id="gradecomment"></h1>
+
+    <a href="index.html">Back to Home Page</a>
+    <script>
+
+    //document.getElementById("computegrade").addEventListener("click",
+    //function ()
+
+    // modern way of calling nameless functions, () and an arrow "=>"
+    // which points to the code after it
+    document.getElementById("computegrade").addEventListener("click",()=>
+        {       var score,items,base,gr,letgr,gradecomment;
+
+            score=document.getElementById("score").value*1;
+            items=document.getElementById("items").value*1;                
+            base=document.getElementById("base").value*1;
+
+            gr = Math.round(base + (score/items)*(100-base));
+            document.getElementById("grade").value = gr;
+
+            if (gr<72)
+                letgr = "F"
+            else if (gr<=75)
+                letgr = "D"
+            else if (gr<=79)
+                letgr = "C"
+            else if (gr<=83)
+                letgr = "C+"
+            else if (gr<=87)
+                letgr = "B"
+            else if (gr<=91)
+                letgr = "B+"
+            else 
+                letgr = "A";
+
+            document.getElementById("lettergrade").value = letgr;
+
+            switch(letgr)
+            {
+                case "F":gradecomment="failing.";
+                    break;
+                case "D":gradecomment="passing.";
+                    break;  
+            //combining the cases this way makes it function like an "or" statement
+                case "C":
+                case "C+":gradecomment="average.";
+                    break;
+                case "B":gradecomment="good.";
+                    break;      
+                case "B+":gradecomment="very good.";
+                    break;
+                default: gradecomment="excellent!";            
+            }
+
+            document.getElementById("gradecomment").innerHTML = 
+            "The grade is " +gradecomment;
+            //"The grade is " +gradecomment+ " Good job.";
+            // ^ how to add text after a variable
+        }
+    );
+    </script>
+</body>
+</html>
