@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Generating Random Numbers and Storing Them to an Array</h1>
+<br><br>
+    <label for="randNumInput">How many numbers to generate?</label>
+    <input id="randNumInput" name="randNumInput" type="number"></input>
+<br><br>
+    <button id="generateNum">Generate Random Numbers</button>
+<br><br>
+    <button id="sortNum">Sort from Smallest to Biggest</button>
+<br><br>
+    <button id="reverseNum">Reverse the Numbers</button>
+        <p id="randNumOutput"></p>
+
+
+    <a href="index.html">Back to Home Page</a>
+    <script>
+        document.getElementById("generateNum").addEventListener("click", ()=>
+        {       var randNumInput,n,j,randNumOutput;
+
+            ArandomNum=[];
+            randNumInput = document.getElementById("randNumInput").value;
+
+            // randNumOutput is initialized here
+            for(j=0, randNumOutput=""; j < randNumInput; j++)
+            {
+                n=Math.round((Math.random() * 100 ) + 1);
+                randNumOutput += n + " ";
+                ArandomNum.push(n); //add n to the array
+            }
+            document.getElementById("randNumOutput").innerHTML = randNumOutput;
+        });
+        
+        document.getElementById("sortNum").addEventListener("click", ()=>
+        {       var sNumOutput,j;
+
+            ArandomNum.sort(function(a,b){return a-b});
+            sNumOutput = "";
+
+            for(n of ArandomNum)
+                sNumOutput += n + " ";
+
+            // the sorted string displays in randNumOutput's location
+            document.getElementById("randNumOutput").innerHTML = sNumOutput;
+        });
+
+        document.getElementById("reverseNum").addEventListener("click", ()=>
+        {       var revNumOutput,j;
+
+            ArandomNum.reverse();
+            revNumOutput = "";
+
+            for(n of ArandomNum)
+                revNumOutput += n + " ";
+
+            // the sorted string displays in randNumOutput's location
+            document.getElementById("randNumOutput").innerHTML = revNumOutput;
+        });
+    var ArandomNum=[];
+    </script>
+</body>
+</html>
