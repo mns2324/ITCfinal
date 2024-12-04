@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Temperature and Height Conversion</h1>
+    <br><br>
+    <label for="convert">Choose a conversion type:</label>
+    <select id="convert" name="convert" onchange="changeContent()">
+        <option value="c2f" selected>Celsius to Fahrenheit</option>
+        <option value="f2c">Fahrenheit to Celsius</option>
+        <option value="m2ft">Meters to Feet</option>
+        <option value="ft2m">Feet to Meters</option>
+    </select>
+    <br><br>
+
+    <div id="content1" class="content">
+        <label for="cel">Celsius:</label>
+        <input id="cel" type="number">
+        <br>
+        <label for="fah">The equivalent in Fahrenheit is:</label>
+        <input id="fah" type="number" readonly>
+    </div>
+
+    <div id="content2" class="content">
+        <label for="fah2">Fahrenheit:</label>
+        <input id="fah2" type="number">
+        <br>
+        <label for="cel2">The equivalent in Celsius is:</label>
+        <input id="cel2" type="number" readonly>
+    </div>
+
+    <div id="content3" class="content">
+        <label for="m">Meters:</label>
+        <input id="m" type="number">
+        <br>
+        <label for="ft">The equivalent in Feet is:</label>
+        <input id="ft" type="number" readonly>
+    </div>
+
+    <div id="content4" class="content">
+        <label for="ft2">Feet:</label>
+        <input id="ft2" type="number">
+        <br>
+        <label for="m2">The equivalent in Meters is:</label>
+        <input id="m2" type="number" readonly>
+    </div>
+
+    <a href="index.html">Back to Home Page</a>
+
+    <script>
+    // hide all divs on first load, and show content1 by default
+    window.onload = function() {
+        hideAllContent();
+        document.getElementById('content1').style.display = 'block'; 
+    };
+
+    function hideAllContent() {
+        // select all content divs and hide them
+        const contentDivs = document.querySelectorAll('.content');
+        contentDivs.forEach(function(div) {
+            div.style.display = 'none'; 
+        });
+    }
+
+    function changeContent() 
+    {
+        hideAllContent();
+        const selectedValue = document.getElementById("convert").value;
+
+        // switch statement to show the corresponding content
+        switch (selectedValue) {
+            case 'c2f':
+                document.getElementById('content1').style.display = 'block';
+                break;
+
+            case 'f2c':
+                document.getElementById('content2').style.display = 'block';
+                break;
+
+            case 'm2ft':
+                document.getElementById('content3').style.display = 'block';
+                break;
+
+            case 'ft2m':
+                document.getElementById('content4').style.display = 'block';
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    // event listener for Celsius to Fahrenheit conversion
+    document.getElementById("cel").addEventListener("keyup", 
+    function (){
+        celToFah();
+    });
+
+    function celToFah() 
+    {       var cel,fah;
+        cel = document.getElementById("cel").value * 1;
+        fah = (cel * 9 / 5) + 32;
+        document.getElementById("fah").value = fah;
+    }
+
+    // event listener for Fahrenheit to Celsius 
+    document.getElementById("fah2").addEventListener("keyup", 
+    function (){
+        fahToCel();
+    });
+
+    function fahToCel() 
+    {       var fah,cel;
+        fah = document.getElementById("fah2").value * 1;
+        cel = (fah - 32) * 5 / 9;
+        document.getElementById("cel2").value = cel;
+    }
+
+    // event listener for Meters to Feet 
+    document.getElementById("m").addEventListener("keyup", 
+    function (){
+        metersToFt();
+    });
+
+    function metersToFt() 
+    {       var m,ft;
+        m = document.getElementById("m").value * 1;
+        ft = m * 3.28084;
+        document.getElementById("ft").value = ft;
+    }
+
+    // event listener for Feet to Meters
+    document.getElementById("ft2").addEventListener("keyup", 
+    function (){
+        ftToMeters();
+    });
+
+    function ftToMeters() 
+    {       var ft,m;
+        ft = document.getElementById("ft2").value * 1;
+        m = ft * 0.3048;
+        document.getElementById("m2").value = m;
+    }
+
+    </script>
+</body>
+</html>
