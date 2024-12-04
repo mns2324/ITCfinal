@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html>
+<body>
+
+    <!--    
+    <h1> head 1 </h1>
+    <h2> head 2 </h2>
+    <h3> head 3 </h3>
+    <h4> head 4 </h4>
+    <h5> head 5 </h5>
+    <h6> head 6 </h6>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porttitor id est eu elementum. Nullam eget orci eu lorem tincidunt tempus quis ut sapien. Aliquam iaculis vehicula orci nec euismod. Nunc sed eros vestibulum, lacinia nulla in, volutpat mi. Sed imperdiet enim nunc, non lobortis nibh ullamcorper eget. Vivamus cursus nisl augue, ut vehicula justo porttitor in. Sed eu scelerisque leo, ut laoreet augue. Nunc eu ullamcorper ligula, sed facilisis felis. Pellentesque interdum sit amet tortor ut consequat. Nam et erat maximus, rutrum enim sit amet, condimentum erat. Duis leo nisl, lobortis sit amet commodo faucibus, pretium luctus ante. Cras a enim porta, facilisis ipsum eu, faucibus libero. </p>
+    --> 
+
+    <h1> This is the say hello page </h1>
+        <br><br>
+    <label for="fname">What is your name?</label> 
+    <input id="fname" type="text">
+    <button onclick="sayhello()">Say Hello!</button>
+        <br><br>
+        <button onclick="issuealert()">alert test</button>
+        <button onclick="issueprompt()">Enter your Name</button>
+        <button onclick="issueconfirm()">Confirm</button>
+        <br>
+        <h1 id="hellomsg"></h1>
+        <br>
+    <a href="test.html">Back to home page.</a>
+
+<!-- javascript is separate from html with completely different syntax -->
+<!-- scripts are usually placed after the content and before the end of the body tag.
+this lets the content load first before the scripts do as the user scrolls down,
+allowing for faster loading times of the content -->
+<!-- .value is used to retrive an input from the user. if not, .innerHTML is used. -->
+<!-- console.log() is used as a checkpoint when debugging. when trying to locate an error,
+you can comment out a section of code and place a console.log with a message before it 
+then run the code. if the message isn't displayed in the console, the commented out code
+must not be the problem which helps eliminate it as the source of the error. -->
+
+<script>
+    function sayhello()
+    {
+        var uname;
+        uname = document.getElementById("fname").value
+
+        document.getElementById("hellomsg").innerHTML
+        = "Hello, " +uname; 
+    }
+    function issuealert()
+    {
+        alert("ALERT TEST");
+    }
+    function issueprompt()
+    {
+        var name; 
+
+        name = prompt("What is your name?");
+
+        alert("Hello, "+name);
+    }
+    function issueconfirm()
+    {
+        if(confirm("Quieres?"))
+            alert("Ogey")
+        else
+            alert("Rrat");
+    }
+</script>
+
+</body>    
+</html>
