@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1>Factorial, Sum and Average of First N Natural Numbers</h1>
+    <br><br>
+    <label for="numInput">Type an integer value:</label>
+    <input id="numInput" name="numInput" type="number" step="1" min="0">
+
+    <p>Display the factorial of the number:
+    <button id="fctril">Factorial</button></p> 
+    <p>Display the sum of zero up to the entered number:
+    <button id="sum">Sum</button></p> 
+    <p>Display the average of zero up to the entered number:
+    <button id="avg">Average</button></p> 
+    <p id="numOutput"></p>
+
+    <br><br>
+    <a href="index.html">Back to Home Page</a>
+
+    <script>
+    // factorial 
+    document.getElementById("fctril").addEventListener("click", () => 
+    {
+        let numInput = parseInt(document.getElementById("numInput").value); // convert to number
+        let fctril = 1;
+
+        //displays message if non-integer or negative value is entered
+        if (!Number.isInteger(numInput) || numInput < 0) 
+        {
+            alert("Please enter a valid positive integer.");
+            return;
+        }
+
+        // factorial logic
+        while (numInput > 1) 
+        {
+            fctril *= numInput;
+            numInput--;
+        }
+        document.getElementById("numOutput").innerHTML = "Factorial: " +fctril;
+    });
+
+    // sum 
+    document.getElementById("sum").addEventListener("click", () => 
+    {
+        let sum = 0;
+        let numInput = parseInt(document.getElementById("numInput").value); // convert to number
+
+        //displays message if non-integer or negative value is entered
+        if (!Number.isInteger(numInput) || numInput < 0) 
+        {
+            alert("Please enter a valid positive integer.");
+            return;
+        }
+
+        // sum logic
+        do 
+        {
+            sum += numInput;
+            numInput--;
+        } while (numInput >= 0);
+        document.getElementById("numOutput").innerHTML = "Sum: " +sum;
+    });
+
+    // average 
+    document.getElementById("avg").addEventListener("click", () => 
+    {
+        let sum = 0;
+        let numInput = parseInt(document.getElementById("numInput").value); // convert to number
+
+        //displays message if non-integer or negative value is entered
+        if (!Number.isInteger(numInput) || numInput < 0) 
+        {
+            alert("Please enter a valid positive integer.");
+            return;
+        }
+
+        // average logic
+        for (let i = 1; i <= numInput; i++) 
+        {
+            sum += i;
+        }
+        let avg = sum / numInput; 
+        document.getElementById("numOutput").innerHTML = "Average: " +avg;
+    });
+    </script>
+</body>
+</html>
