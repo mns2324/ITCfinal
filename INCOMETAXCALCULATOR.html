@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
 </head>
 <style>
@@ -79,10 +80,9 @@
         </tbody>
     </table>
  
-    <a href="index.html">Back to Home Page</a>
+    <a href="INDEX.html">Back to Home Page</a>
     <script> 
-        document.getElementById("income").addEventListener("keyup", () => 
-          {
+        document.getElementById("income").addEventListener("keyup", () => {
             var income, tax;
             income = document.getElementById("income").value * 1; // get the value of income as a number
 
@@ -112,8 +112,10 @@
                 tax = 2410000 + (income - 8000000) * 0.35; // PHP 2,410,000 + 35% of the excess over PHP 8,000,000
             }
 
-            // fix to 2 decimal places
-            document.getElementById("tax").value = tax.toFixed(2);  
+            // format tax with commas and fix to 2 decimal places
+            const formatNumber = new Intl.NumberFormat('en-US').format;
+            document.getElementById("tax").value = formatNumber(tax.toFixed(2));  
+
         });
     </script>
 </body>
