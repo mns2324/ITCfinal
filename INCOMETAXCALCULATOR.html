@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<head>
+</head>
+<style>
+    table { margin-left: auto; margin-right: auto; }
+</style>
+<body>
+    <h1>Income Tax Calculator</h1>
+    <br><br>
+    <label for="income">Type your taxable income:</label>
+    <input id="income" type="number" step="0.01">
+    <br><br>
+    <label for="tax">Your income tax is:</label>
+    <input id="tax" type="text" readonly>
+    <br><br>
+    <table border="3">
+        <thead>
+            <tr>
+                <td colspan="2">Amount of Net Taxable Income</td>
+                <td>Basic Tax + Rate</td>
+                <td colspan="2">Examples</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">Range</td>
+                <td></td>
+                <td>Taxable Income</td>
+                <td>Income Tax</td>
+            </tr>
+            <!-- 0 to 250k -->
+            <tr>
+                <td>&lt; PHP 250K</td>
+                <td>PHP 250,000</td>
+                <td>0%</td>
+                <td>180,000</td>
+                <td>0.00</td>
+            </tr>
+            <!-- 250k to 400k -->
+            <tr>
+                <td>PHP 250,000</td>
+                <td>PHP 400,000</td>
+                <td>20% of the excess over P250,000</td>
+                <td>320,000</td>
+                <td>14,000</td>
+            </tr>
+            <!-- 400k to 800k -->
+            <tr>
+                <td>PHP 400,000</td>
+                <td>PHP 800,000</td>
+                <td>P30,000 + 25% of the excess over P400,000</td>
+                <td>520,000</td>
+                <td>60,000</td>
+            </tr>
+            <!-- 800k to 2m -->
+            <tr>
+                <td>PHP 800,000</td>
+                <td>PHP 2,000,000</td>
+                <td>P130,000 + 30% of the excess over P800,000</td>
+                <td>930,000</td>
+                <td>169,000</td>
+            </tr>
+            <!-- 2m to 8m -->
+            <tr>
+                <td>PHP 2,000,000</td>
+                <td>PHP 8,000,000</td>
+                <td>P490,000 + 32% of the excess over P2,000,000</td>
+                <td>2,400,000</td>
+                <td>618,000</td>
+            </tr>
+            <!-- 8m and above -->
+            <tr>
+                <td>PHP 8,000,000</td>
+                <td>&gt; PHP 8M</td>
+                <td>P2,410,000 + 35% of the excess over P8,000,000</td>
+                <td>10,000,000</td>
+                <td>3,110,000</td>
+            </tr>
+        </tbody>
+    </table>
+ 
+    <a href="index.html">Back to Home Page</a>
+    <script> 
+        document.getElementById("income").addEventListener("keyup", () => 
+          {
+            var income, tax;
+            income = document.getElementById("income").value * 1; // get the value of income as a number
+
+            // tax calculation based on the income
+            if (income <= 250000) 
+            {
+                tax = 0; // 0% for income <= PHP 250,000
+            } 
+            else if (income <= 400000) 
+            {
+                tax = (income - 250000) * 0.20; // 20% of the excess over PHP 250,000
+            } 
+            else if (income <= 800000) 
+            {
+                tax = 30000 + (income - 400000) * 0.25; // PHP 30,000 + 25% of the excess over PHP 400,000
+            } 
+            else if (income <= 2000000) 
+            {
+                tax = 130000 + (income - 800000) * 0.30; // PHP 130,000 + 30% of the excess over PHP 800,000
+            } 
+            else if (income <= 8000000) 
+            {
+                tax = 490000 + (income - 2000000) * 0.32; // PHP 490,000 + 32% of the excess over PHP 2,000,000
+            } 
+            else 
+            {
+                tax = 2410000 + (income - 8000000) * 0.35; // PHP 2,410,000 + 35% of the excess over PHP 8,000,000
+            }
+
+            // fix to 2 decimal places
+            document.getElementById("tax").value = tax.toFixed(2);  
+        });
+    </script>
+</body>
+</html>
