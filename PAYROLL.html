@@ -2,8 +2,13 @@
 <html>
 <body>
 <style>
-    input{
-    width: 50px;
+    #employeeName 
+    {
+        width: 135px;  
+    }
+    input
+    {
+        width: 40px;
     }
 </style>
 
@@ -110,7 +115,6 @@
                 <td>${employee.deduction.toFixed(2)}</td>
                 <td>${netPay.toFixed(2)}</td>
             `;
-          
             // add the row to the table
             payrollTableBody.appendChild(row);
         });
@@ -142,7 +146,7 @@
         }
     });
 
-    // CLEAR EMPLOYEES
+    // CLEAR EMPLOYEES 
     document.getElementById("btnclear").addEventListener("click", () => 
     {
         // indicate that the action is to clear the payroll
@@ -173,7 +177,7 @@
             // if the action is to delete employee
             if (action == "delete") 
             {
-                // retrieve the employee number to delete from the input field
+                // retrieve the employee number to delete from the input
                 // and parse as an integer
                 empNum = parseInt(deleteEmpNumInput.value);
                 
@@ -202,7 +206,7 @@
     // SECONDARY DIALOG CLOSE EVENT, listens for close event
     // of the SECOND confirmation dialog
     dlgSecondary.addEventListener("close", () => 
-    {   // check the current action if the user clicks confirm
+    {   // check the curren action if the user clicks confirm
         if (dlgSecondary.returnValue == "confirm") 
         {
             if (action == "delete") 
