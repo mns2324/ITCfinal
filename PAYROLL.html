@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+    input{
+    width: 50px;
+    }
+</style>
+
+    <h1>Payroll Management System</h1>
+    <br><br>
+
+    <!-- Primary Confirmation Dialog -->
+    <dialog id="dlgPrimary">
+        <form method="dialog">
+            <h4 id="primaryMsg"></h4>
+            <div id="primaryInputContainer" style="display: none">
+                <label for="deleteEmpNum">Type here: </label>
+                <input id="deleteEmpNum" type="number" min="1">
+            </div>
+            <br>
+            <button id="btnPrimaryConfirm" value="confirm">Confirm</button>
+            <button id="btnPrimaryCancel" value="cancel">Cancel</button>
+        </form>
+    </dialog>
+
+    <!-- Secondary Confirmation Dialog -->
+    <dialog id="dlgSecondary">
+        <form method="dialog">
+            <h4 id="secondaryMsg"></h4>
+            <button id="btnSecondaryConfirm" value="confirm">Yes</button>
+            <button id="btnSecondaryCancel" value="cancel">No</button>
+        </form>
+    </dialog>
+
+    <table border="3" id="payrollTable">
+        <thead>
+            <tr>
+                <td>No.</td>
+                <td>Employee Name</td>
+                <td>Days Worked</td>
+                <td>Daily Rate</td>
+                <td>Gross Pay</td>
+                <td>Deduction Amount</td>
+                <td>Net Pay</td>
+            </tr>
+        </thead>
+        <tbody id="payrollTableBody">
+            <!-- rows will be dynamically added and removed here -->
+        </tbody>
+    </table>
+    <br>
+    <p>No. = Payroll List line number<br>
+    Gross Pay = Days Worked * Daily Rate<br>
+    Net Pay = Gross Pay - Deduction Amount<br></p>
+    
+    <h4>Add your payroll entries here:</h4>
+    <label for="employeeName">Employee Name:</label>
+    <input id="employeeName" type="text"><br>
+    <label for="daysWorked">Days Worked:</label>
+    <input id="daysWorked" type="number"><br>
+    <label for="dailyRate">Daily Rate:</label>
+    <input id="dailyRate" type="number"><br>
+    <label for="deduction">Deduction Amount:</label>
+    <input id="deduction" type="number"><br>
+    <button id="btnadd">Add Employee</button>
+    <br><br>
+
+    <button id="btnclear">Clear Entire Payroll</button>
+    <button id="btndelete">Delete Employee</button>
+    <!-- local storage button -->
+    <button id="btnstore">Save Payroll Data</button>
+    <br><br>
+    <a href="index.html">Back to Home Page</a>
+
+<script>
+    (() => {
+    const payrollTableBody = document.getElementById("payrollTableBody");
+    const dlgPrimary = document.getElementById("dlgPrimary");
+    const dlgSecondary = document.getElementById("dlgSecondary");
+    const primaryInputContainer = document.getElementById("primaryInputContainer");
+    const deleteEmpNumInput = document.getElementById("deleteEmpNum");
+    // load data from local storage. if no data is found, initialize as empty.
+    const employeeList = JSON.parse(localStorage.getItem("employeeList")) || []; 
+    let action = null; // keeps track of the clear & delete action
+    let empNum = null; // tracks the employee number to delete
+
+    // renders the payroll table
+    function renderTable() 
+    {
+        // clears any existing content in <tbody> which contains the dynamic rows
+        // ensures that there are no duplicate rows when the table is re-rendered
+        payrollTableBody.innerHTML = "";
+        // loop through each element (employee) from employeeList array 
+        // index as the increment
+        employeeList.forEach((employee, index) => 
+        {
+            // calculate for gross and net pay
+            const grossPay = employee.daysWorked * employee.dailyRate;
+            const netPay = grossPay - employee.deduction;
+
+            // creates a new payroll entry
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${employee.name}</td>
+                <td>${employee.daysWorked}</td>
+                <td>${employee.dailyRate.toFixed(2)}</td>
+                <td>${grossPay.toFixed(2)}</td>
+                <td>${employee.deduction.toFixed(2)}</td>
+                <td>${netPay.toFixed(2)}</td>
+            `;
+          
+            // add the row to the table
+            payrollTableBody.appendChild(row);
+        });
+    }
+
+    // rerender the table with saved data upon page open or refresh
+    renderTable();
+
+    // ADD EMPLOYEE
+    document.getElementById("btnadd").addEventListener("click", () => 
+    {   // trim removes any leading whitespace from the name input
+        const name = document.getElementById("employeeName").value.trim();
+        // parseFloat will convert these inputs to floating point
+        const daysWorked = parseFloat(document.getElementById("daysWorked").value);
+        const dailyRate = parseFloat(document.getElementById("dailyRate").value);
+        const deduction = parseFloat(document.getElementById("deduction").value);
+
+        // if name isn't empty and the number inputs aren't NaN
+        if (name && !isNaN(daysWorked) && !isNaN(dailyRate) && !isNaN(deduction)) 
+        {
+            // add employee to employeeList array with these values
+            employeeList.push({name, daysWorked, dailyRate, deduction});
+            renderTable();
+            alert("Employee added successfully.");
+        } 
+        else 
+        {
+            alert("Please fill in all fields correctly!");
+        }
+    });
+
+    // CLEAR EMPLOYEES
+    document.getElementById("btnclear").addEventListener("click", () => 
+    {
+        // indicate that the action is to clear the payroll
+        action = "clear";
+        // hides the input field since it uses the same dialog window
+        // as the delete employee function
+        primaryInputContainer.style.display = "none"; 
+        document.getElementById("primaryMsg").innerHTML = "Delete all entries of the payroll?";
+        dlgPrimary.showModal(); // show the dialog
+    });
+
+    // DELETE EMPLOYEE
+    document.getElementById("btndelete").addEventListener("click", () => 
+    {
+        // indicate that the action is to delete an employee
+        action = "delete";
+        primaryInputContainer.style.display = "block"; // show input field for employee number
+        document.getElementById("primaryMsg").innerHTML = "Enter the employee number to delete:";
+        dlgPrimary.showModal(); // show the dialog
+    });
+
+    // PRIMARY DIALOG CLOSE EVENT, listens for close event
+    // of the FIRST confirmation dialog
+    dlgPrimary.addEventListener("close", () => 
+    {   // check the current action if the user clicks confirm
+        if (dlgPrimary.returnValue == "confirm") 
+        {   
+            // if the action is to delete employee
+            if (action == "delete") 
+            {
+                // retrieve the employee number to delete from the input field
+                // and parse as an integer
+                empNum = parseInt(deleteEmpNumInput.value);
+                
+                // if not valid number, less than 1 or greater than amount of entries
+                if (isNaN(empNum) || empNum < 1 || empNum > employeeList.length) 
+                {
+                    alert("Invalid employee number!");
+                    deleteEmpNumInput.value = ""; // clear input if invalid number
+                    return;
+                }
+
+                // display the secondary confirm dialog with this message
+                document.getElementById("secondaryMsg").innerHTML = "This action can't be undone. <br> Are you sure you want to delete employee number "+empNum+" ?";
+                dlgSecondary.showModal();
+            } 
+            // if the action is to clear payroll, display the 
+            // secondary confirm dialog with this message
+            else if (action == "clear") 
+            {
+                document.getElementById("secondaryMsg").innerHTML = "This action can't be undone. Are you sure?";
+                dlgSecondary.showModal();
+            }
+        }
+    });
+
+    // SECONDARY DIALOG CLOSE EVENT, listens for close event
+    // of the SECOND confirmation dialog
+    dlgSecondary.addEventListener("close", () => 
+    {   // check the current action if the user clicks confirm
+        if (dlgSecondary.returnValue == "confirm") 
+        {
+            if (action == "delete") 
+            {
+                // remove the employee by splicing the employeeList array
+                // empNum - 1 to convert to program counting
+                // e.g. empNum entered is 2, its array position is 1
+                employeeList.splice(empNum - 1, 1);
+                renderTable(); // update table
+                alert("Employee number "+empNum+" has been deleted.");
+                deleteEmpNumInput.value = ""; // input field is cleared
+            }
+            else if (action == "clear") 
+            {
+                employeeList.length = 0; // clear the array
+                localStorage.removeItem("employeeList"); // clear from local storage
+                renderTable(); // update table to show nothing
+                alert("Payroll has been cleared.");
+            } 
+        }
+    });
+
+    // STORE PAYROLL DATA TO LOCAL STORAGE
+    // when btnstore is clicked
+    document.getElementById("btnstore").addEventListener("click", () => 
+    {
+        // convert employeeList into a JSON string
+        // which will contain all the elements and values of the array
+        localStorage.setItem("employeeList", JSON.stringify(employeeList));
+        alert("Payroll data has been stored for later use.");
+    });
+})();
+</script>
+</body>
+</html>
