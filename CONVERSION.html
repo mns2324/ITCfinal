@@ -1,64 +1,85 @@
 <!DOCTYPE html>
 <html>
 <body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
+
 
     <h1>Temperature and Height Conversion</h1>
     <br><br>
-    <label for="convert">Choose a conversion type:</label>
-    <select id="convert" name="convert" onchange="changeContent()">
-        <option value="c2f" selected>Celsius to Fahrenheit</option>
-        <option value="f2c">Fahrenheit to Celsius</option>
-        <option value="m2ft">Meters to Feet</option>
-        <option value="ft2m">Feet to Meters</option>
-    </select>
-    <br><br>
-
-    <div id="content1" class="content">
-        <label for="cel">Celsius:</label>
-        <input id="cel" type="number">
-        <br>
-        <label for="fah">The equivalent in Fahrenheit is:</label>
-        <input id="fah" type="number" readonly>
-    </div>
-
-    <div id="content2" class="content">
-        <label for="fah2">Fahrenheit:</label>
-        <input id="fah2" type="number">
-        <br>
-        <label for="cel2">The equivalent in Celsius is:</label>
-        <input id="cel2" type="number" readonly>
-    </div>
-
-    <div id="content3" class="content">
-        <label for="m">Meters:</label>
-        <input id="m" type="number">
-        <br>
-        <label for="ft">The equivalent in Feet is:</label>
-        <input id="ft" type="number" readonly>
-    </div>
-
-    <div id="content4" class="content">
-        <label for="ft2">Feet:</label>
-        <input id="ft2" type="number">
-        <br>
-        <label for="m2">The equivalent in Meters is:</label>
-        <input id="m2" type="number" readonly>
+    <div class="convselect" style="text-align: center;">
+        <label for="convert">Choose a conversion type:</label>
+        <select id="convert" name="convert" onchange="changeContent()">
+            <option value="c2f" selected>Celsius to Fahrenheit</option>
+            <option value="f2c">Fahrenheit to Celsius</option>
+            <option value="m2ft">Meters to Feet</option>
+            <option value="ft2m">Feet to Meters</option>
+        </select>
     </div>
     <br><br>
 
-    <a href="index.html">Back to Home Page</a>
+    <div class="form-container">
+        <div id="content1" class="content">
+            <label for="cel">Celsius:</label>
+            <input id="cel" type="number">
+            <br>
+            <label for="fah">The equivalent in Fahrenheit is:</label>
+            <input id="fah" type="number" readonly>
+        </div>
 
-    <script>
+        <div id="content2" class="content">
+            <label for="fah2">Fahrenheit:</label>
+            <input id="fah2" type="number">
+            <br>
+            <label for="cel2">The equivalent in Celsius is:</label>
+            <input id="cel2" type="number" readonly>
+        </div>
+
+        <div id="content3" class="content">
+            <label for="m">Meters:</label>
+            <input id="m" type="number">
+            <br>
+            <label for="ft">The equivalent in Feet is:</label>
+            <input id="ft" type="number" readonly>
+        </div>
+
+        <div id="content4" class="content">
+            <label for="ft2">Feet:</label>
+            <input id="ft2" type="number">
+            <br>
+            <label for="m2">The equivalent in Meters is:</label>
+            <input id="m2" type="number" readonly>
+        </div>
+    </div>
+
+    <br><br>
+    <!-- flex centers this button according to the viewport size -->
+    <!-- inline-block makes the border adjust to the size of the text -->
+    <!-- padding will add extra space around the text -->
+    <div style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <footer style="display: inline-block; text-align: center; border: 1px solid black; background-color: #f4f4f4; padding: 5px;">
+        <a href="index.html" style="font-size: 1.2em; color: blue; text-align: center; text-decoration: none;">Back to Home Page</a>
+    </footer>
+    </div>
+
+<script>
     // hide all divs on first load, and show content1 by default
-    window.onload = function() {
+    window.onload = function() 
+    {
         hideAllContent();
         document.getElementById('content1').style.display = 'block'; 
     };
 
-    function hideAllContent() {
+    function hideAllContent() 
+    {
         // select all content divs and hide them
         const contentDivs = document.querySelectorAll('.content');
-        contentDivs.forEach(function(div) {
+        contentDivs.forEach(function(div) 
+        {
             div.style.display = 'none'; 
         });
     }
@@ -69,7 +90,8 @@
         const selectedValue = document.getElementById("convert").value;
 
         // switch statement to show the corresponding content
-        switch (selectedValue) {
+        switch (selectedValue) 
+        {
             case 'c2f':
                 document.getElementById('content1').style.display = 'block';
                 break;
@@ -92,57 +114,81 @@
     }
 
     // event listener for Celsius to Fahrenheit conversion
-    document.getElementById("cel").addEventListener("keyup", 
-    function (){
+    document.getElementById("cel").addEventListener("keyup", function () 
+    {
         celToFah();
     });
 
     function celToFah() 
-    {       var cel,fah;
+    {
+        var cel, fah;
         cel = document.getElementById("cel").value * 1;
         fah = (cel * 9 / 5) + 32;
         document.getElementById("fah").value = fah;
+
+        adjustInputSize("fah", fah);  // adjust the size based on the result
     }
 
-    // event listener for Fahrenheit to Celsius 
-    document.getElementById("fah2").addEventListener("keyup", 
-    function (){
+    // event listener for Fahrenheit to Celsius
+    document.getElementById("fah2").addEventListener("keyup", function () 
+    {
         fahToCel();
     });
 
     function fahToCel() 
-    {       var fah,cel;
+    {
+        var fah, cel;
         fah = document.getElementById("fah2").value * 1;
         cel = (fah - 32) * 5 / 9;
         document.getElementById("cel2").value = cel;
+
+        adjustInputSize("cel2", cel);  // adjust the size based on the result
     }
 
-    // event listener for Meters to Feet 
-    document.getElementById("m").addEventListener("keyup", 
-    function (){
+    // event listener for Meters to Feet
+    document.getElementById("m").addEventListener("keyup", function () 
+    {
         metersToFt();
     });
 
     function metersToFt() 
-    {       var m,ft;
+    {
+        var m, ft;
         m = document.getElementById("m").value * 1;
         ft = m * 3.28084;
         document.getElementById("ft").value = ft;
+
+        adjustInputSize("ft", ft);  // adjust the size based on the result
     }
 
     // event listener for Feet to Meters
-    document.getElementById("ft2").addEventListener("keyup", 
-    function (){
+    document.getElementById("ft2").addEventListener("keyup", function () 
+    {
         ftToMeters();
     });
 
     function ftToMeters() 
-    {       var ft,m;
+    {
+        var ft, m;
         ft = document.getElementById("ft2").value * 1;
         m = ft * 0.3048;
         document.getElementById("m2").value = m;
+
+        adjustInputSize("m2", m);  // adjust the size based on the result
     }
 
-    </script>
+    // function to adjust the input field size based on the value
+    function adjustInputSize(inputId, value) 
+    {
+        var inputField = document.getElementById(inputId);
+
+        // convert the number to string to get its length
+        var valueLength = value.toString().length;
+
+        // set the width based on the length of the value then apply to "ch"
+        // "ch" = input field width
+        inputField.style.width = (valueLength + 2) + "ch";
+    }
+</script>
 </body>
 </html>
