@@ -33,7 +33,7 @@ input
     text-align: left; /* preserve left alignment of text */
     border: 10px solid transparent; 
     max-width: 300px;
-    border-radius: 2px; /* rounded corners */
+    border-radius: 10px; /* rounded corners */
     background: whitesmoke;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
     justify-content: center;
