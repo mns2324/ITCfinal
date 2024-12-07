@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-<style>
-    #employeeName 
-    {
-        width: 135px;  
-    }
-    input
-    {
-        width: 40px;
-    }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
 
     <h1>Payroll Management System</h1>
     <br><br>
@@ -58,28 +54,40 @@
     <p>No. = Payroll List line number<br>
     Gross Pay = Days Worked * Daily Rate<br>
     Net Pay = Gross Pay - Deduction Amount<br></p>
-    
-    <h4>Add your payroll entries here:</h4>
-    <label for="employeeName">Employee Name:</label>
-    <input id="employeeName" type="text"><br>
-    <label for="daysWorked">Days Worked:</label>
-    <input id="daysWorked" type="number"><br>
-    <label for="dailyRate">Daily Rate:</label>
-    <input id="dailyRate" type="number"><br>
-    <label for="deduction">Deduction Amount:</label>
-    <input id="deduction" type="number"><br>
-    <button id="btnadd">Add Employee</button>
+    <br>
+    <h4 style="text-align: center;">Add your payroll entries here:</h4>
+    <div class="form-container">
+        <label for="employeeName">Employee Name:</label>
+        <input id="employeeName" type="text"><br>
+        <label for="daysWorked">Days Worked:</label>
+        <input id="daysWorked" type="number"><br>
+        <label for="dailyRate">Daily Rate:</label>
+        <input id="dailyRate" type="number"><br>
+        <label for="deduction">Deduction Amount:</label>
+        <input id="deduction" type="number"><br>
+        <button id="btnadd">Add Employee</button>
+    </div>
     <br><br>
 
-    <button id="btnclear">Clear Entire Payroll</button>
-    <button id="btndelete">Delete Employee</button>
-    <!-- local storage button -->
-    <button id="btnstore">Save Payroll Data</button>
+    <div class="threebuttons">
+        <button id="btnclear">Clear Entire Payroll</button>
+        <button id="btndelete">Delete Employee</button>
+        <!-- local storage button -->
+        <button id="btnstore">Save Payroll Data</button>
+    </div>
+
     <br><br>
-    <a href="index.html">Back to Home Page</a>
+    <!-- flex centers this button according to the viewport size -->
+    <!-- inline-block makes the border adjust to the size of the text -->
+    <!-- padding will add extra space around the text -->
+    <div style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <footer style="display: inline-block; text-align: center; border: 1px solid black; background-color: #f4f4f4; padding: 5px;">
+        <a href="index.html" style="font-size: 1.2em; color: blue; text-align: center; text-decoration: none;">Back to Home Page</a>
+    </footer>
+    </div>
 
 <script>
-    (() => {
+(() => {
     const payrollTableBody = document.getElementById("payrollTableBody");
     const dlgPrimary = document.getElementById("dlgPrimary");
     const dlgSecondary = document.getElementById("dlgSecondary");
