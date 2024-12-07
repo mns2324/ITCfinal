@@ -2,18 +2,25 @@
 <html lang="en">
 <head>
 </head>
-<style>
-    table { margin-left: auto; margin-right: auto; }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
+
 <body>
     <h1>Income Tax Calculator</h1>
     <br><br>
-    <label for="income">Type your taxable income:</label>
-    <input id="income" type="number" step="0.01">
-    <br><br>
-    <label for="tax">Your income tax is:</label>
-    <input id="tax" type="text" readonly>
-    <br><br>
+    <div class="incomeAndTax" style="text-align: center;">
+        <label for="income">Type your taxable income:</label>
+        <input id="income" type="number" step="0.01">
+        <br><br>
+        <label for="tax">Your income tax is:</label>
+        <input id="tax" type="text" readonly>
+        <br><br>
+    </div>
+    
     <table border="3">
         <thead>
             <tr>
@@ -79,44 +86,54 @@
             </tr>
         </tbody>
     </table>
- 
-    <a href="index.html">Back to Home Page</a>
-    <script> 
-        document.getElementById("income").addEventListener("keyup", () => {
-            var income, tax;
-            income = document.getElementById("income").value * 1; // get the value of income as a number
 
-            // tax calculation based on the income
-            if (income <= 250000) 
-            {
-                tax = 0; // 0% for income <= PHP 250,000
-            } 
-            else if (income <= 400000) 
-            {
-                tax = (income - 250000) * 0.20; // 20% of the excess over PHP 250,000
-            } 
-            else if (income <= 800000) 
-            {
-                tax = 30000 + (income - 400000) * 0.25; // PHP 30,000 + 25% of the excess over PHP 400,000
-            } 
-            else if (income <= 2000000) 
-            {
-                tax = 130000 + (income - 800000) * 0.30; // PHP 130,000 + 30% of the excess over PHP 800,000
-            } 
-            else if (income <= 8000000) 
-            {
-                tax = 490000 + (income - 2000000) * 0.32; // PHP 490,000 + 32% of the excess over PHP 2,000,000
-            } 
-            else 
-            {
-                tax = 2410000 + (income - 8000000) * 0.35; // PHP 2,410,000 + 35% of the excess over PHP 8,000,000
-            }
+    <br><br>
+    <!-- flex centers this button according to the viewport size -->
+    <!-- inline-block makes the border adjust to the size of the text -->
+    <!-- padding will add extra space around the text -->
+    <div style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <footer style="display: inline-block; text-align: center; border: 1px solid black; background-color: #f4f4f4; padding: 5px;">
+        <a href="index.html" style="font-size: 1.2em; color: blue; text-align: center; text-decoration: none;">Back to Home Page</a>
+    </footer>
+    </div>
 
-            // format tax with commas and fix to 2 decimal places
-            const formatNumber = new Intl.NumberFormat('en-US').format;
-            document.getElementById("tax").value = formatNumber(tax.toFixed(2));  
+<script> 
+    document.getElementById("income").addEventListener("keyup", () => 
+    {
+        var income, tax;
+        income = document.getElementById("income").value * 1; // get the value of income as a number
 
-        });
-    </script>
+        // tax calculation based on the income
+        if (income <= 250000) 
+        {
+            tax = 0; // 0% for income <= PHP 250,000
+        } 
+        else if (income <= 400000) 
+        {
+            tax = (income - 250000) * 0.20; // 20% of the excess over PHP 250,000
+        } 
+        else if (income <= 800000) 
+        {
+            tax = 30000 + (income - 400000) * 0.25; // PHP 30,000 + 25% of the excess over PHP 400,000
+        } 
+        else if (income <= 2000000) 
+        {
+            tax = 130000 + (income - 800000) * 0.30; // PHP 130,000 + 30% of the excess over PHP 800,000
+        } 
+        else if (income <= 8000000) 
+        {
+            tax = 490000 + (income - 2000000) * 0.32; // PHP 490,000 + 32% of the excess over PHP 2,000,000
+        } 
+        else 
+        {
+            tax = 2410000 + (income - 8000000) * 0.35; // PHP 2,410,000 + 35% of the excess over PHP 8,000,000
+        }
+
+        // format tax with commas and fix to 2 decimal places
+        const formatNumber = new Intl.NumberFormat('en-US').format;
+        document.getElementById("tax").value = formatNumber(tax.toFixed(2));  
+
+    });
+</script>
 </body>
 </html>
