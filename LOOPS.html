@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html>
 <body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
 
     <h1>Factorial, Sum and Average of First N Natural Numbers</h1>
     <br><br>
-    <label for="numInput">Type an integer value:</label>
-    <input id="numInput" name="numInput" type="number" step="1" min="0">
-    <p>(Decimal values are truncated)</p>
-    <br>
-    <p>Display the factorial of the number:
-    <button id="fctril">Factorial</button></p> 
-    <p>Display the sum of zero up to the entered number:
-    <button id="sum">Sum</button></p> 
-    <p>Display the average of zero up to the entered number:
-    <button id="avg">Average</button></p> 
-    <p id="numOutput"></p>
+    <div class="intvalue" style="text-align: center">
+        <label for="numInput">Type an integer value:</label>
+        <input id="numInput" name="numInput" type="number" step="1" min="0">
+    </div>
+    <br><br>
+    <div style="min-width: 70%; justify-content: center;" class="form-container">
+        <p style="font-size: 1.35em">Display the factorial of the number:
+        <button id="fctril">Factorial</button></p> 
+        <p style="font-size: 1.35em">Display the sum of zero up to the entered number:
+        <button id="sum">Sum</button></p> 
+        <p style="font-size: 1.35em">Display the average of zero up to the entered number:
+        <button id="avg">Average</button></p> 
+        <p id="numOutput"></p>
+    </div>
+    <p style="font-weight: bold; font-size: 1.1em;">Decimal values are truncated, output values are only in integer.</p>
 
     <br><br>
-    <a href="index.html">Back to Home Page</a>
-
-    <script>
+    <!-- flex centers this button according to the viewport size -->
+    <!-- inline-block makes the border adjust to the size of the text -->
+    <!-- padding will add extra space around the text -->
+    <div style="display: flex; justify-content: center; align-items: center; height: auto;">
+    <footer style="display: inline-block; text-align: center; border: 1px solid black; background-color: #f4f4f4; padding: 5px;">
+        <a href="index.html" style="font-size: 1.2em; color: blue; text-align: center; text-decoration: none;">Back to Home Page</a>
+    </footer>
+    </div>
+    
+<script>
     // factorial 
     document.getElementById("fctril").addEventListener("click", () => 
     {
@@ -85,6 +102,6 @@
         let avg = sum / numInput; 
         document.getElementById("numOutput").innerHTML = "Average: " +avg;
     });
-    </script>
+</script>
 </body>
 </html>
